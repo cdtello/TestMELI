@@ -3,13 +3,14 @@
 _Este proyecto es una prueba técnica de backend para MELI.
 
 ## END POINTS 🚀
-POST -> https://0rib5f4600.execute-api.us-east-1.amazonaws.com/dev/mutant
-GET  -> https://0rib5f4600.execute-api.us-east-1.amazonaws.com/dev/stats
+* **POST -> https://0rib5f4600.execute-api.us-east-1.amazonaws.com/dev/mutant
+* **GET  -> https://0rib5f4600.execute-api.us-east-1.amazonaws.com/dev/stats
 
 Por medio de estos 2 endpoints, podemos realizar los ejercicios solicitados en la prueba y de esta manera, ayudarle a MAGNETO a saber la información que desea.
 
 ## Ejecutando las pruebas ⚙️
 El body en el metod POST debe ir en formato JSON de la siguiente forma:
+* **
 {
 "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
 }
