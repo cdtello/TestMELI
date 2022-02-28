@@ -1,6 +1,6 @@
 # Test Backend SUPER-MELI
 
-_Este proyecto es una prueba técnica de backend para MELI.
+Este proyecto es una prueba técnica de backend para MELI.
 
 ## END POINTS 🚀
 * POST -> https://0rib5f4600.execute-api.us-east-1.amazonaws.com/dev/mutant
@@ -9,26 +9,20 @@ _Este proyecto es una prueba técnica de backend para MELI.
 Por medio de estos 2 endpoints, podemos realizar los ejercicios solicitados en la prueba y de esta manera, ayudarle a MAGNETO a saber la información que desea.
 
 ## Ejecutando las pruebas ⚙️
-El body en el metodo POST debe ir en formato JSON de la siguiente forma:
+* El body en el metodo POST debe ir en formato JSON de la siguiente forma:
 * **
 {
-* **
 "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
-* **
 }
+
 * **
-* **
-* **
-La Respuesta de el metodo GET es la siguiente:
+
+* La Respuesta de el metodo GET es la siguiente:
 * **
 {
-* **
     "count_mutant_dna": 5,
-* **
     "count_human_dna": 10,
-* **
     "ratio": 0.5
-* **
 }
 
 
