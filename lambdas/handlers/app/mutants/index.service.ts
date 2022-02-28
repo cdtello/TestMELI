@@ -1,6 +1,18 @@
-import { Direction, Matrix } from ".";
+/**
+* @author Carlos Tello
+* @file mutants/service.ts
+* @description adnManager, save and get DynamoDB
+*/
+
+import { Direction, Matrix } from "./index";
 
 const NumSequence:number = 4;
+
+/**
+* Analyze Rows or Columns to check ADN SECUENCE
+* @param { Matrix, Direction }  - Matrix to Process, type of work
+* @return { number } ADN SECUENCE in the check.
+*/
 export const analyzeRowsOrColumns = (matrix: Matrix, type:Direction): number => {
     const maxDeep = matrix.length;
     let resultColumns = 0;
@@ -15,7 +27,6 @@ export const analyzeRowsOrColumns = (matrix: Matrix, type:Direction): number => 
             current = matrix[type===1?x:y][type===1?y:x];
             current === prev? sum++ : sum=1;
             if (sum == NumSequence) {
-                console.log('Secuencia ->',current);
                 resultColumns++;
             }
             prev = current            
@@ -23,6 +34,14 @@ export const analyzeRowsOrColumns = (matrix: Matrix, type:Direction): number => 
      }
     return resultColumns;
 }
+
+
+
+/**
+* Analyze Rows to check ADN SECUENCE
+* @param { string[] }  - array to Process
+* @return { number } ADN SECUENCE in the check.
+*/
 const analizeRow = (row:string[]): number => {
     const maxDeep = row.length;
     let resultColumns = 0;
@@ -33,7 +52,6 @@ const analizeRow = (row:string[]): number => {
         current = row[y];
         current === prev? sum++ : sum=1;
         if (sum == NumSequence) {
-            console.log('Secuencia ->',current);
             resultColumns++;
         }
         prev = current            
@@ -41,6 +59,13 @@ const analizeRow = (row:string[]): number => {
     return resultColumns;
 }
 
+
+
+/**
+* Analyze all Diagonals to check ADN SECUENCE
+* @param { Matrix }  - Matrix to Process
+* @return { number } ADN SECUENCE in the check.
+*/
 export const analyzeDiagonals = (matrix: Matrix): number => {
     let finalResult = 0;
     const maxDeep = matrix.length;
@@ -57,7 +82,7 @@ export const analyzeDiagonals = (matrix: Matrix): number => {
         diagsRigth=[];
         x1 = x;
         y1 = x;
-        //Diagonal \-->
+        //Diagonals Left to Rigth ***\***-->
         for (let y = 0; y < maxDeep; y++) {
             if(x1 < maxDeep){
                 diagsLeft=[...diagsLeft, matrix[x1][y]];
@@ -78,15 +103,13 @@ export const analyzeDiagonals = (matrix: Matrix): number => {
         } 
         diagsLeft=[];
         diagsRigth=[];
-        //Diagonal /-->
-        console.log('**** Diag ****');
+        //Diagonals Rigth to Left ***/***-->
         for (let z = maxDeep-1; z > 0-1; z--) {
             if(y1 < maxDeep){
                 diagsLeft=[...diagsLeft, matrix[y1][z]];
                 if(z+y1 !== maxDeep-1){
                     diagsRigth=[...diagsRigth, matrix[z][y1]];
-                }
-                
+                }                
             }
             y1++;
         }

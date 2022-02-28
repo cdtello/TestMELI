@@ -1,18 +1,57 @@
-service: testMELI
-frameworkVersion: '2'
+service: my-test-meli
+frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: nodejs12.x
-
+  environment:
+    MUTANT_ADN_TABLE_DYNAMO: dev-adn-table
+  
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:Scan"
+      Resource: "*"
 
 functions:
-  hello:
+  mutants:
     handler: './lambdas/handlers/app/mutants/index.handler'
     events:
       - http:
           method: post
           path: mutant
+  stats:
+    handler: './lambdas/handlers/app/stats/index.handler'
+    events:
+      - http:
+          method: get
+          path: stats
+
+resources:
+  Resources:
+    DevMutantTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:        
+        AttributeDefinitions:
+        - AttributeName: "adnId"
+          AttributeType: "S"
+        KeySchema:
+        - AttributeName: "adnId"
+          KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.MUTANT_ADN_TABLE_DYNAMO}
+
 plugins:
-  - serverless-offline
   - serverless-plugin-typescript
+  - serverless-offline
+ # - serverless-plugin-include-dependencies
+
+#package:
+#  exclude:
+#    - node_modules/**
